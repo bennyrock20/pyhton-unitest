@@ -3,8 +3,9 @@ from Calc import *
 
 class Test(unittest.TestCase):
 
-    def setup():
-        print("Setting Up")
+    @unittest.skip("demonstrating skipping")
+    def test_nothing(self):
+        self.fail("shouldn't happen")
 
     def test_identification(self):
         self.assertTrue(Calc("0104967500").is_valid_identification())
@@ -20,6 +21,10 @@ class Test(unittest.TestCase):
 
     def test_identification5(self):
         self.assertFalse(Calc("j1049675001").is_valid_identification())
+
+    @unittest.expectedFailure
+    def test_fail(self):
+        self.assertTrue(Calc("weffjejfewqw").is_valid_identification())
 
 if __name__=='__main__':
     unittest.main()
